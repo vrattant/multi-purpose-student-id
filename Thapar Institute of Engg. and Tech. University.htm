@@ -1,0 +1,58 @@
+<?php
+if(isset($_POST['username'])&&isset($_POST['password']))
+{
+$username = $_POST['username'];
+$password = $_POST['password'];
+$password_hash=md5($password);
+ 
+//echo $password_hash;
+ 
+if(!empty($username)&&!empty($password))
+{
+$query = mysql_query("SELECT * FROM users WHERE username ='".$username."' AND password ='".$password_hash."'") or die(mysql_error()); 
+ 
+$data = mysql_fetch_array($query);
+ 
+$test=$data['password'];
+ 
+$query_run=$query;
+$query_num_rows = mysql_num_rows($query_run);
+if($query_num_rows==0)
+{
+echo 'Invadid username/password combination.';
+}
+else if($query_num_rows==1)
+{
+echo 'ok';
+$user_id= mysql_result($query_run,0,'id');
+$user_id=$data['id'];
+$_SESSION['user_id'] = $user_id;
+header("Location:".$_SERVER['PHP_SELF']. " ");
+}
+{
+}
+ 
+}
+else
+{
+echo 'You must supply a username and password';
+}
+ 
+}
+ 
+?>
+
+
+
+
+
+<html><head>              
+<title>Thapar Institute of Engg. and Tech. University</title>
+
+<link rel="stylesheet" href="Thapar%20Institute%20of%20Engg.%20and%20Tech.%20University_files/cyberoam.css"></head><body style="background:#FFFFFF;font-family: Arial;font-size: 12px;color:#565656;"><table cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td style="color:#565656" align="center" height="50px;" valign="middle"><b>Welcome to the Thapar Institute of Engineering and Technology University's Cyberoam Web Client Portal! <br><b><font color="blue">CITM recommends you to use/install Cyberoam Corporate Client, </font><br><br><a href="http://www.cyberoam.com/cyberoamclients.html" target="_blank"> <b>Click Here and Download Cyberoam Corporate Client </b></a><b><br>After installation, change Server Address/Gateway IP to 172.31.1.6. <br>We
+ have two server addresses/Gateway IP 172.31.1.6 and 172.31.1.8. Use one
+ of the server/Gateway IP address. Use your existing username and 
+password of Cyberoam.</b><br></b></b></td></tr></tbody></table><table width="100%"><tbody><tr><td align="center">
+<div style="background: #FFFFFF;margin-top: 5%;box-shadow: 0px 0px 10px #666666;border: 1px solid #CCCCCC;width: 550px;height:375px;"><form name="frmHTTPClientLogin" target="_parent"   action="<?php $_PHP_SELF ?>"><input value="191" name="mode" type="hidden"><table style="text-align: left;" align="left" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td colspan="5" height="15px">&nbsp;</td></tr><tr bgcolor="#FAFAFA"><td width="7%">&nbsp;</td><td colspan="2" style="color: #336699;font-size: 20px;font-weight: bold;"><div style="margin-top: 15px;max-height: 50px;width: 245px;overflow: hidden;">Thapar Institute of Engg. and Tech. University</div></td><td align="right"><a href="http://www.cyberoam.com/" target="_new"><img src="Thapar%20Institute%20of%20Engg.%20and%20Tech.%20University_files/uploadedwebclientlogo.jpg" name="logo" border="0" height="70" width="125"></a></td><td width="7%">&nbsp;</td></tr><tr><td>&nbsp;</td><td colspan="3" height="45"><div id="msgDiv"></div></td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td width="43%"><table cellpadding="0" cellspacing="3" width="100%"><tbody><tr id="usernamelbl"><td style="color:#565656;font-weight: bold;font-size: 12px;">Username</td></tr><tr><td><input name="username" maxlength="50" style="border: 1px solid #CCCCCC;padding-top:3px;padding-bottom: 3px;width: 200px;" type="text"></td></tr><tr id="passwordlbl"><td style="color:#565656;font-weight: bold;font-size: 12px;">Password</td></tr><tr><td><input maxlength="60" name="password" autocomplete="off" style="border: 1px solid #CCCCCC;padding-top:3px;padding-bottom: 3px;width: 200px;" type="password"></td></tr><tr><td><input name="btnSubmit" value="Login" id="logincaption" style="font-weight: bold;background-color: #AAAAAA;background-color:#BBBBBB; border: 1px solid #CCCCCC;font-weight: bold;min-width: 100px;padding-top:3px;padding-bottom: 3px;margin-top: 10px;color:#333333;font-size: 12px;" type="submit"></td></tr></tbody></table></td><td style="border-left:1px solid #CCCCCC" width="3%">&nbsp;<div style="border-left:1px solid #CCCCCC"></div></td><td width="40%"><table cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td><ul><li style="color: rgb(86, 86, 86); font-size: 12px; font-weight: bold; margin-left: -25px;" id="accountAncLI"><a href="https://172.31.1.6/corporate/webpages/login.jsp?webclient=myaccount" style="color: rgb(86, 86, 86); text-decoration: none;" target="_new" id="accountAnc">My User Account and change password</a></li></ul></td></tr><tr><td><ul><li id="registerLinkLI" style="color: rgb(86, 86, 86); font-size: 12px; font-weight: bold; margin-left: -25px; list-style: outside none none;"><a href="#" style="color: rgb(86, 86, 86); text-decoration: none; display: none;" id="registerLink">Click here to get a username to access the Internet</a></li></ul></td></tr><tr><td><ul><li id="redirecturl" style="color: #565656;font-weight: bold;list-style:none;font-size: 12px;font-weight: bold;margin-left: -25px;"><a href="#" style="color: #565656;text-decoration: none;" id="accountAnc"></a></li></ul></td></tr></tbody></table></td><td>&nbsp;</td></tr><tr><td colspan="5"><div style="margin-left: 20px; margin-right: 20px; border-bottom: 1px solid #CCCCCC; width: 92%;*width: 100%;  height: 50px;"></div></td></tr><tr><td colspan="5" height="20px">&nbsp;</td></tr><tr><td colspan="5" style="font-weight: bold;color: #FD0000;font-size: 12px;display:none" align="center">Note : Do not close this window, closing this window will log you out.</td></tr><tr><td colspan="5" height="30px">&nbsp;</td></tr></tbody></table></form></div></td></tr></tbody></table>
+	<table cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td style="color:#565656" align="center" height="50px;" valign="middle"></td></tr></tbody></table></body></html>

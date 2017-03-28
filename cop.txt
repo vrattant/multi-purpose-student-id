@@ -1,0 +1,10 @@
+$rightvar=$_SESSION['user_id'];
+ $get = mysql_query("SELECT * FROM users") or die(mysql_error());  
+ 
+               if (mysql_num_rows($get) ==0){
+	echo "NO SELLER TO DISPLAY";
+	}
+else {
+	while($get_row = mysql_fetch_assoc($get)){
+		echo'USER ID = '.$get_row['username'].'&nbsp&nbspID :   '.$get_row['id'].'&nbsp---&nbsp&nbsp&nbsp NAME: '.$get_row['firstname'].'&nbsp&nbsp'.$get_row['surname'];
+		echo '<br><br>';
